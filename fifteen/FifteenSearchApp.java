@@ -17,7 +17,7 @@ public class FifteenSearchApp {
         //PuzzleState myState=new PuzzleState();
 
         // Create a random puzzle and memorise the puzzle state.
-        PuzzleState myState = randomPuzzle(24);
+        PuzzleState myState = randomPuzzle(0);
         PuzzleState myState2 = new PuzzleState(myState); // Mengcopy state dari puzzle1
 
 //        System.out.println(myState);

@@ -219,8 +219,16 @@ public final class PuzzleState implements State {
         int falseCount=0;
         for (int i=0; i < this.tiles.length; i++) {
             for (int j=0; j < this.tiles[i].length; j++) {
+                boolean lastTile = i == this.tiles.length -1 && j == this.tiles[i].length -1;
                 int currentTile = this.tiles[i][j];
-                int correctTile = (i * this.tiles.length) + (j+1);
+                int correctTile;
+                if (lastTile) {
+                    // JIka dia kepingan terakhir, maka nilai yang benar adalah '0'.
+                    correctTile = 0;
+                } else {
+                    // Jika bukan kepingan terakhir, maka disesuaikan dengan angka urutannya.
+                    correctTile = (i * this.tiles.length) + (j+1);
+                }
 //                System.out.print(correctTile);
                 if (currentTile != correctTile) {
                     falseCount++;
@@ -229,6 +237,14 @@ public final class PuzzleState implements State {
         }
 
         return falseCount;
+    }
+
+    /**
+     * Mengembalikan nilai boolean, apakah puzzle sudah terselesaikan atau belum.
+     * @return boolean, whether the puzzle has been solved or not.
+     */
+    public boolean isSolved() {
+        return this.falsePositionCount() == 0;
     }
 
 }
