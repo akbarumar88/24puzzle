@@ -17,9 +17,16 @@ public class FifteenSearchApp {
         //PuzzleState myState=new PuzzleState();
 
         // Create a random puzzle and memorise the puzzle state.
-        PuzzleState myState= randomPuzzle(10);
-        PuzzleState myState2 = new PuzzleState(myState);
+        PuzzleState myState = randomPuzzle(24);
+        PuzzleState myState2 = new PuzzleState(myState); // Mengcopy state dari puzzle1
 
+//        System.out.println(myState);
+//        System.out.println(myState2);
+
+        int falseCount = myState.falsePositionCount(); // Mendapatkan jumlah keping yang salah posisi.
+        System.out.println("Jumlah keping yang salah posisi : " + falseCount);
+
+//        return;
         // or "shuffle" the tiles around manually a little bit...
         //myState=new PuzzleState(myState, PuzzleState.MOVE_LEFT);
         //myState=new PuzzleState(myState, PuzzleState.MOVE_UP);
@@ -29,45 +36,46 @@ public class FifteenSearchApp {
 
         // now perform the search from the "shuffled" initial state (fringe is empty), and
         // pull out the actions that were used to generate this goal state from the initial state
-        Action[] actions1G = solveH1G(new PuzzleState(myState));
-        Action[] actions1A = solveH1A(new PuzzleState(myState));
-        Action[] actions2G = solveH2G(new PuzzleState(myState));
-        Action[] actions2A = solveH2A(new PuzzleState(myState));
+//        Action[] actions1G = solveH1G(new PuzzleState(myState));
+//        Action[] actions1A = solveH1A(new PuzzleState(myState));
+//        Action[] actions2G = solveH2G(new PuzzleState(myState));
+//        Action[] actions2A = solveH2A(new PuzzleState(myState));
 
         // List the initial state and results of actions performed.
         System.out.println("Initial state:");
-        System.out.println(myState2.toString());
+        System.out.println(myState2);
 
-        System.out.println("Solution via H1 with Greedy:-------------");
-        for (int i=0; i<actions1G.length; i++) {
-            System.out.println((i+1)+": "+actions1G[actions1G.length-1-i]);
-            PuzzleState.performAction(myState2,actions1G[actions1G.length-1-i]);
-            System.out.println(myState2.toString());
-        }
+//        System.out.println("Solution via H1 with Greedy:-------------");
+//        for (int i=0; i<actions1G.length; i++) {
+//            System.out.println((i+1)+": "+actions1G[actions1G.length-1-i]);
+//            PuzzleState.performAction(myState2,actions1G[actions1G.length-1-i]);
+//            System.out.println(myState2.toString());
+//        }
 
-        System.out.println("Solution via H1 with A*:-------------");
-        myState2 = new PuzzleState(myState);
-        for (int i=0; i<actions1A.length; i++) {
-            System.out.println((i+1)+": "+actions1A[actions1A.length-1-i]);
-            PuzzleState.performAction(myState2,actions1A[actions1A.length-1-i]);
-            System.out.println(myState2.toString());
-        }
 
-        System.out.println("Solution via H2 with Greedy:-------------");
-        myState2 = new PuzzleState(myState);
-        for (int i=0; i<actions2G.length; i++) {
-            System.out.println((i+1)+": "+actions2G[actions2G.length-1-i]);
-            PuzzleState.performAction(myState2,actions2G[actions2G.length-1-i]);
-            System.out.println(myState2.toString());
-        }
+//        System.out.println("Solution via H1 with A*:-------------");
+//        myState2 = new PuzzleState(myState);
+//        for (int i=0; i<actions1A.length; i++) {
+//            System.out.println((i+1)+": "+actions1A[actions1A.length-1-i]);
+//            PuzzleState.performAction(myState2,actions1A[actions1A.length-1-i]);
+//            System.out.println(myState2.toString());
+//        }
 
-        System.out.println("Solution via H2 with A*:-------------");
-        myState2 = new PuzzleState(myState);
-        for (int i=0; i<actions2A.length; i++) {
-            System.out.println((i+1)+": "+actions2A[actions2A.length-1-i]);
-            PuzzleState.performAction(myState2,actions2A[actions2A.length-1-i]);
-            System.out.println(myState2.toString());
-        }
+//        System.out.println("Solution via H2 with Greedy:-------------");
+//        myState2 = new PuzzleState(myState);
+//        for (int i=0; i<actions2G.length; i++) {
+//            System.out.println((i+1)+": "+actions2G[actions2G.length-1-i]);
+//            PuzzleState.performAction(myState2,actions2G[actions2G.length-1-i]);
+//            System.out.println(myState2.toString());
+//        }
+
+//        System.out.println("Solution via H2 with A*:-------------");
+//        myState2 = new PuzzleState(myState);
+//        for (int i=0; i<actions2A.length; i++) {
+//            System.out.println((i+1)+": "+actions2A[actions2A.length-1-i]);
+//            PuzzleState.performAction(myState2,actions2A[actions2A.length-1-i]);
+//            System.out.println(myState2.toString());
+//        }
         
     }
 
@@ -149,6 +157,7 @@ public class FifteenSearchApp {
      */
     public static PuzzleState randomPuzzle(int maxShuffles) {
         PuzzleState myState=new PuzzleState();
+//        System.out.println(myState);
         int totalMoves = 0;
         while(totalMoves < maxShuffles){
             double r = Math.random();

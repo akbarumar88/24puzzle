@@ -31,13 +31,13 @@ public final class PuzzleState implements State {
      * From there all sequences of legal actions will render a puzzle that can be solved. 
      */
     public PuzzleState() {
-        this.tiles=new int[4][4];
-        for (int i=0; i<4; i++) {
-            for (int j=0; j<4; j++) {
-                this.tiles[i][j]=i*4+j+1;
+        this.tiles=new int[5][5];
+        for (int i=0; i<5; i++) {
+            for (int j=0; j<5; j++) {
+                this.tiles[i][j] = i * 5+j+1;
             }
         }
-        tiles[3][3]=0; // empty
+        tiles[4][4]=0; // empty
     }
     
     /**
@@ -73,7 +73,7 @@ public final class PuzzleState implements State {
      * @throws RuntimeException if the action is invalid
      */
     public PuzzleState(PuzzleState origin, Action action) {
-        this(origin);
+        this(origin); // Mentrigger constructor sendiri, mengcopy data state dari origin
         performAction(this,action);
     }
     
@@ -209,6 +209,26 @@ public final class PuzzleState implements State {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Menghitung jumlah keping yang salah posisi.
+     * @return an integer representating the count of the false position of the tiles.
+     */
+    public int falsePositionCount() {
+        int falseCount=0;
+        for (int i=0; i < this.tiles.length; i++) {
+            for (int j=0; j < this.tiles[i].length; j++) {
+                int currentTile = this.tiles[i][j];
+                int correctTile = (i * this.tiles.length) + (j+1);
+//                System.out.print(correctTile);
+                if (currentTile != correctTile) {
+                    falseCount++;
+                }
+            }
+        }
+
+        return falseCount;
     }
 
 }
