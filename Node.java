@@ -17,7 +17,7 @@ public class Node {
     private final Action action;
     private final double cost;
     private final int    depth;
-
+ 
     protected Node() {
         this(null, null, null, 0);
     }
@@ -41,10 +41,14 @@ public class Node {
         this.parent=parent;
         this.action=action;
         this.cost=cost;
-        if (parent!=null)
+        if (parent!=null) {
+            // Jika dia child, maka nilai g(n) adalah depth dari parentnya ditambah dengan 1.
             this.depth=parent.getDepth()+1;
-        else
+        }
+        else {
+            // Jika dia adalah root, maka g(n)=0.
             this.depth=0;
+        }
     }
     
     /**
@@ -190,6 +194,5 @@ public class Node {
         }
         return null;
     }
-
 
 }
